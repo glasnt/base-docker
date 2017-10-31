@@ -10,6 +10,7 @@ ENV PYTHONUNBUFFERED=1 \
 
 COPY stack /stack/base
 RUN DEBIAN_FRONTEND=noninteractive /stack/base/install.sh
+RUN DEBIAN_FRONTEND=noninteractive /stack/base/install2.sh
 
 ENTRYPOINT ["/tini", "-g", "--"]
 

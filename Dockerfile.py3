@@ -1,4 +1,4 @@
-FROM python:3.6.3-stretch
+FROM python:3.6.3-slim-stretch
 
 ENV PYTHONUNBUFFERED=1 \
     PIP_REQUIRE_VIRTUALENV=false \
@@ -9,7 +9,11 @@ ENV PYTHONUNBUFFERED=1 \
     LANG=C.UTF-8
 
 COPY stack /stack/base
+RUN apt-get update
+RUN apt-get install -y wget curl
+
 RUN DEBIAN_FRONTEND=noninteractive /stack/base/install.sh
+RUN DEBIAN_FRONTEND=noninteractive /stack/base/install2.sh
 
 RUN virtualenv --no-site-packages /virtualenv
 

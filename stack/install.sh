@@ -10,18 +10,19 @@ PYTHON_MAJOR_VERSION=$(python -c 'import platform; print(platform.python_version
 SCRIPT=$(readlink -f "$0")
 BASEDIR=$(dirname "$SCRIPT")
 
+
 #
 # SYSTEM PACKAGES
 #
 # Add postgres repo
 echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' >/etc/apt/sources.list.d/pgdg.list
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-
+wget  -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+#
 # Update package listings
 apt-get update
 
 # Install packages
-xargs apt-get install -y --force-yes --no-install-recommends < ${BASEDIR}/packages.txt
+xargs apt-get install -y --no-install-recommends < ${BASEDIR}/packages.txt
 
 
 if [ $PYTHON_MAJOR_VERSION -eq 3 ]
